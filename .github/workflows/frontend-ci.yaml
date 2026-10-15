@@ -7,7 +7,7 @@ on:
 
 
 env:
-  WORKING_DIR: ninja_scientists_frontend
+  WORKING_DIR: frontend
 
 jobs:
   build:
