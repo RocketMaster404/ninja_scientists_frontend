@@ -4,12 +4,9 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches-ignore:
-      - main
 
-env:
-  WORKING_DIR: ninja_scientists_frontend
+
+
 
 jobs:
   build:
@@ -24,14 +21,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install dependencies
-        working-directory: ${{ env.WORKING_DIR }}
+      - name: Install dependencies      
         run: npm install
 
-      - name: Run lint
-        working-directory: ${{ env.WORKING_DIR }}
+      - name: Run lint      
         run: npm run lint
 
-      - name: Build project
-        working-directory: ${{ env.WORKING_DIR }}
+      - name: Build project      
         run: npm run build
