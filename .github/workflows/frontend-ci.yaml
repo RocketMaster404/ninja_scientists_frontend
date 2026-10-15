@@ -1,0 +1,37 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches-ignore:
+      - main
+
+env:
+  WORKING_DIR: ninja_scientists_frontend
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        working-directory: ${{ env.WORKING_DIR }}
+        run: npm install
+
+      - name: Run lint
+        working-directory: ${{ env.WORKING_DIR }}
+        run: npm run lint
+
+      - name: Build project
+        working-directory: ${{ env.WORKING_DIR }}
+        run: npm run build
