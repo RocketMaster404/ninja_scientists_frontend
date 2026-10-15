@@ -4,9 +4,7 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches-ignore:
-      - main
+
 
 env:
   WORKING_DIR: ninja_scientists_frontend
