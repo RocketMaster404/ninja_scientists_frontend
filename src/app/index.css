@@ -1,0 +1,46 @@
+:root {
+  /* Text och ytor */
+  --text: #5B6670;
+  --text-h: #23303A;
+  --background: #FFFFFF;
+  --border: #E4DFDA;
+
+  /* Knappar och mindre markerade ytor*/
+  --buttons: #2F6486;
+  --category: rgba(66, 129, 164, 0.12);
+  --button-border: rgba(66, 129, 164, 0.5);
+
+  /* Status*/
+  --success: #48A9A6;
+  --warning: #D4B483;
+  --danger: #C1666B;
+
+  /* Form och skugga */
+  --radius: 12px;
+  --shadow: rgba(35, 48, 58, 0.1) 0 10px 15px -3px,
+    rgba(35, 48, 58, 0.05) 0 4px 6px -2px;
+
+  /* Typsnitt */
+  --sans: 'Plus Jakarta Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Plus Jakarta Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  font: 18px/145% var(--sans);
+  color-scheme: light;
+  color: var(--text);
+  background: var(--background);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+h1, h2, h3 {
+  font-family: var(--heading);
+  color: var(--text-h);
+}
+
+a {
+  color: var(--buttons);
+}
