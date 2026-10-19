@@ -1,58 +1,54 @@
 import "./MeetingCard.css";
 import InfoRow from "./InfoRow/InfoRow";
 import { CalendarIcon, PinIcon, UserIcon } from "./Icons/Icons";
+import type { Meetup } from "../types/Meetup";
 
-export interface MeetingData {
-  category: string;
-  title: string;
-  date: string;
-  location: string;
-  host: string;
-  attendees: number;
-  capacity: number;
-}
+type MeetingCardProps = {
+    meetup: Meetup;
+};
 
-function MeetingCard() {
-  const data: MeetingData = {
-    category: "Kategori",
-    title: "Titel",
-    date: "2026-10-19",
-    location: "Plats",
-    host: "Värd",
-    attendees: 12,
-    capacity: 20,
-  };
+function MeetingCard({ meetup }: MeetingCardProps) {
+    const percent = Math.min(
+        (meetup.registrationCount / meetup.capacity) * 100,
+        100,
+    );
 
-  const percent = Math.min((data.attendees / data.capacity) * 100, 100);
+    return (
+        <div className="meetingCard">
+            <p className="categoryBadge">{meetup.categoryName}</p>
 
-  return (
-    <div className="meetingCard">
-      <p className="categoryBadge">{data.category}</p>
+            <div className="titleContainer">
+                <h1>{meetup.title}</h1>
+            </div>
 
-      <div className="titleContainer">
-        <h1>{data.title}</h1>
-      </div>
+            <div className="infoContainer">
+                <InfoRow icon={<CalendarIcon />}>
+                    {formatDate(meetup.startTime)}
+                </InfoRow>
+                <InfoRow icon={<PinIcon />}>
+                    {meetup.location}, {meetup.city}
+                </InfoRow>
+                <InfoRow icon={<UserIcon />}>Värd: {meetup.host}</InfoRow>
+            </div>
 
-      <div className="infoContainer">
-        <InfoRow icon={<CalendarIcon />}>{data.date}</InfoRow>
-        <InfoRow icon={<PinIcon />}>{data.location}</InfoRow>
-        <InfoRow icon={<UserIcon />}>Värd: {data.host}</InfoRow>
-      </div>
+            <div className="attendeesContainer">
+                <div className="progressTrack">
+                    <div
+                        className="progressFill"
+                        style={{ width: `${percent}%` }}
+                    />
+                </div>
+                <p className="attendeesText">
+                    {meetup.registrationCount} av {meetup.capacity} platser
+                    anmälda
+                </p>
+            </div>
 
-      <div className="attendeesContainer">
-        <div className="progressTrack">
-          <div className="progressFill" style={{ width: `${percent}%` }} />
+            <div className="buttonContainer">
+                <button>Läs mer</button>
+            </div>
         </div>
-        <p className="attendeesText">
-          {data.attendees} av {data.capacity} platser anmälda
-        </p>
-      </div>
-
-      <div className="buttonContainer">
-        <button>Läs mer</button>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default MeetingCard;
