@@ -1,7 +1,11 @@
 import "./LoginPage.css";
 
 function LoginPage() {
-  return <div>LoginPage</div>;
+    return (
+        <div>
+            <p>HomePage</p>
+        </div>
+    );
 }
 
 export default LoginPage;
