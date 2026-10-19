@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import "./SearchBar.css";
 import { mockCities } from "../FakeData/mockCities";
+import { mockCategories } from "../FakeData/mockCategories";
 
 export type SearchFilters = {
     query: string;
@@ -29,12 +30,10 @@ const defaultLocations: Option[] = mockCities.map((c) => ({
     label: c.city,
 }));
 
-const defaultCategories: Option[] = [
-    { value: "tech", label: "Tech" },
-    { value: "sport", label: "Sport" },
-    { value: "musik", label: "Musik" },
-    { value: "mat", label: "Mat & dryck" },
-];
+const defaultCategories: Option[] = mockCategories.map((c) => ({
+    value: String(c.id),
+    label: c.categoryName,
+}));
 
 function SearchBar({
     onSearch,
