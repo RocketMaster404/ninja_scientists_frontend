@@ -1,10 +1,7 @@
-import React from 'react'
-import "./DetailsPage.css"
+import "./DetailsPage.css";
 
 function DetailsPage() {
-  return (
-    <div>DetailsPage</div>
-  )
+  return <div>DetailsPage</div>;
 }
 
-export default DetailsPage
+export default DetailsPage;

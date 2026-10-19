@@ -1,10 +1,7 @@
-import React from 'react'
-import "./DetailsTextBox.css"
+import "./DetailsTextBox.css";
 
 function DetailsTextBox() {
-  return (
-    <div>DetailsTextBox</div>
-  )
+  return <div>DetailsTextBox</div>;
 }
 
-export default DetailsTextBox
+export default DetailsTextBox;

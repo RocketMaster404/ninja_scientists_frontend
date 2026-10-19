@@ -1,10 +1,7 @@
-import React from 'react'
-import "./MyRegisterCard.css"
+import "./MyRegisterCard.css";
 
 function MyRegisterCard() {
-  return (
-    <div>MyRegisterCard</div>
-  )
+  return <div>MyRegisterCard</div>;
 }
 
-export default MyRegisterCard
+export default MyRegisterCard;
