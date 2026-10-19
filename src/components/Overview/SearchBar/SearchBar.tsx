@@ -1,12 +1,12 @@
 import { useState, type FormEvent } from "react";
 import "./SearchBar.css";
-
+import { mockCities } from "../FakeData/mockCities";
 
 export type SearchFilters = {
     query: string;
-    date: string;      
-    location: string;  
-    category: string;  
+    date: string;
+    location: string;
+    category: string;
 };
 
 type Option = { value: string; label: string };
@@ -24,13 +24,10 @@ const dateOptions: Option[] = [
     { value: "month", label: "Denna månad" },
 ];
 
-
-const defaultLocations: Option[] = [
-    { value: "stockholm", label: "Stockholm" },
-    { value: "goteborg", label: "Göteborg" },
-    { value: "malmo", label: "Malmö" },
-    { value: "online", label: "Online" },
-];
+const defaultLocations: Option[] = mockCities.map((c) => ({
+    value: c.city,
+    label: c.city,
+}));
 
 const defaultCategories: Option[] = [
     { value: "tech", label: "Tech" },
@@ -44,15 +41,13 @@ function SearchBar({
     locations = defaultLocations,
     categories = defaultCategories,
 }: SearchBarProps) {
-
-
     const [query, setQuery] = useState("");
     const [date, setDate] = useState("");
     const [location, setLocation] = useState("");
     const [category, setCategory] = useState("");
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault(); 
+        e.preventDefault();
         onSearch?.({ query, date, location, category });
     }
 
