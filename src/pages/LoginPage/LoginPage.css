@@ -1,0 +1,21 @@
+.login-page {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  column-gap: 4rem;
+  align-items: center;
+  text-align: left;
+}
+
+@media (max-width: 800px) {
+  .login-page {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.5rem;
+    align-content: center;
+  }
+}

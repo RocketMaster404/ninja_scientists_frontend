@@ -1,27 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import Layout from "../../shared/components/Header/Layout/Layout";
 import LoginPage from "../../pages/LoginPage/LoginPage"
 import OverviewPage from "../../pages/OverviewPage/OverviewPage"
 import DetailsPage from "../../pages/DetailsPage/DetailsPage"
 import ProfilePage from "../../pages/ProfilePage/ProfilePage"
+import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <LoginPage/>
-    },
-    {
-        path: "/overview",
-        element: <OverviewPage/>
-    },
-    {
-        path: "/details",
-        element: <DetailsPage/>
-    },
-    {
-        path: "/profile",
-        element: <ProfilePage/>
+        element: <Layout/>,
+        children: [
+            { path: "/", element: <LoginPage/> },
+            { path: "/register", element: <RegisterPage/> },
+            { path: "/overview", element: <OverviewPage/> },
+            { path: "/details", element: <DetailsPage/> },
+            { path: "/profile", element: <ProfilePage/> },
+        ],
     },
 ]);
+
 
 export default router;
