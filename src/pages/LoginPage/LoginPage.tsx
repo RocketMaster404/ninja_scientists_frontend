@@ -5,7 +5,7 @@ import "./LoginPage.css";
 
 export default function LoginPage() {
   return (
-    <main className="auth-layout">
+    <main className="login-page">
       <HeroText />
       <AuthCard>
         <LoginForm />

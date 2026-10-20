@@ -37,6 +37,4 @@
   color: var(--text);
 }
 
-.form-link a {
-  font-weight: 700;
-}
+.form-link a { font-weight: 700; }
