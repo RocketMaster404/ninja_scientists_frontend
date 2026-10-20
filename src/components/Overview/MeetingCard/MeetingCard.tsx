@@ -3,6 +3,7 @@ import InfoRow from "./InfoRow/InfoRow";
 import { CalendarIcon, PinIcon, UserIcon } from "./Icons/Icons";
 import type { Meetup } from "../types/Meetup";
 import { formatDate } from "../../../shared/utils/formatDate";
+import { useNavigate } from "react-router-dom";
 
 type MeetingCardProps = {
     meetup: Meetup;
@@ -13,6 +14,8 @@ function MeetingCard({ meetup }: MeetingCardProps) {
         (meetup.registrationCount / meetup.capacity) * 100,
         100,
     );
+
+    const navigate = useNavigate();
 
     return (
         <div className="meetingCard">
@@ -46,7 +49,9 @@ function MeetingCard({ meetup }: MeetingCardProps) {
             </div>
 
             <div className="buttonContainer">
-                <button>Läs mer</button>
+                <button onClick={() => navigate(`/meetups/${meetup.id}`)}>
+                    Läs mer
+                </button>
             </div>
         </div>
     );
