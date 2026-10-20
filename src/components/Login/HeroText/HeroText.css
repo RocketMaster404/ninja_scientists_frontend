@@ -1,0 +1,43 @@
+.hero-badge {
+  display: inline-block;
+  background: var(--category);
+  color: var(--buttons);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.1;
+  font-weight: 800;
+  margin: 1rem 0;
+}
+
+.hero-lead {
+  color: var(--text);
+  font-size: 1.1rem;
+  max-width: 34rem;
+}
+
+.hero-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.6rem;
+  color: var(--text-h);
+}
+
+.hero-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero-checklist li::before {
+  content: "✓";
+  color: var(--success);
+  font-weight: 800;
+}
