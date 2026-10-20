@@ -36,5 +36,66 @@
   font-size: 0.95rem;
   color: var(--text);
 }
+/* ---------- Knappar ---------- */
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.85rem 1.4rem;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-.form-link a { font-weight: 700; }
+.btn-primary {
+  width: 100%;
+  background: var(--buttons);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--buttons) 85%, black);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-accent {
+  background: var(--warning);
+  color: var(--text-h);
+}
+
+/* ---------- Meddelanden ---------- */
+.alert {
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  color: var(--text-h);
+}
+
+.alert ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.alert a {
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.alert-success {
+  background: color-mix(in srgb, var(--success) 15%, white);
+  border: 1px solid var(--success);
+}
+
+.alert-error {
+  background: color-mix(in srgb, var(--danger) 15%, white);
+  border: 1px solid var(--danger);
+}
+.form-link a {
+  font-weight: 700;
+}
