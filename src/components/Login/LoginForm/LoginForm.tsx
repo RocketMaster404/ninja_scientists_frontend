@@ -1,12 +1,13 @@
 // src/components/Login/LoginForm/LoginForm.tsx
-import { useState, type ChangeEvent, type FormEvent } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, type ChangeEvent, type SyntheticEvent} from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../shared/context/AuthContext";
 import "./LoginForm.css";
 
 export default function LoginForm() {
   const { user, login } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Sätts av registreringssidan när kontot just skapats
   const justRegistered =
@@ -21,14 +22,18 @@ export default function LoginForm() {
     setForm((prev) => ({ ...prev, [name]: value }));
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
     setErrors([]);
 
     const result = await login(form.email, form.password);
-    if (!result.success) setErrors(result.errors);
-
+    if (result.success){
+      navigate("/overview");
+      return
+    }
+    
+    setErrors(result.errors)
     setLoading(false);
   }
 
