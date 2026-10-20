@@ -1,0 +1,21 @@
+.infoRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--text);
+}
+
+.infoRow__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    color: var(--text);
+}
+
+.infoRow__icon svg {
+    width: 100%;
+    height: 100%;
+}

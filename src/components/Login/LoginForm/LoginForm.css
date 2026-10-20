@@ -36,7 +36,6 @@
   font-size: 0.95rem;
   color: var(--text);
 }
-
 /* ---------- Knappar ---------- */
 .btn {
   display: inline-block;
@@ -70,7 +69,6 @@
   color: var(--text-h);
 }
 
-
 /* ---------- Meddelanden ---------- */
 .alert {
   padding: 0.8rem 1rem;
@@ -80,8 +78,14 @@
   color: var(--text-h);
 }
 
-.alert ul { margin: 0; padding-left: 1.2rem; }
-.alert a { font-weight: 700; color: var(--text-h); }
+.alert ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.alert a {
+  font-weight: 700;
+  color: var(--text-h);
+}
 
 .alert-success {
   background: color-mix(in srgb, var(--success) 15%, white);
@@ -92,5 +96,6 @@
   background: color-mix(in srgb, var(--danger) 15%, white);
   border: 1px solid var(--danger);
 }
-
-.form-link a { font-weight: 700; }
+.form-link a {
+  font-weight: 700;
+}
