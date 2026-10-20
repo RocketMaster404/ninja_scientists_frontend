@@ -1,16 +1,16 @@
-/* src/components/Login/AuthCard/AuthCard.css */
 .auth-card {
-  background: var(--surface);
-  border-radius: 20px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.5);
   padding: 1.5rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
 }
 
 .auth-tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: #ece8e2;
-  border-radius: 12px;
+  background: var(--border);
+  border-radius: var(--radius);
   padding: 4px;
   margin-bottom: 1.5rem;
 }
@@ -18,13 +18,13 @@
 .auth-tab {
   text-align: center;
   padding: 0.75rem;
-  border-radius: 9px;
-  color: #4b5560;
+  border-radius: calc(var(--radius) - 3px);
+  color: var(--text);
   font-weight: 700;
   text-decoration: none;
 }
 
 .auth-tab.active {
-  background: var(--primary);
+  background: var(--buttons);
   color: #fff;
 }

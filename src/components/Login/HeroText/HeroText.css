@@ -1,8 +1,7 @@
-/* src/components/Login/HeroText/HeroText.css */
 .hero-badge {
   display: inline-block;
-  background: #dce8f1;
-  color: var(--primary);
+  background: var(--category);
+  color: var(--buttons);
   font-size: 0.8rem;
   font-weight: 600;
   padding: 0.35rem 0.8rem;
@@ -17,9 +16,8 @@
 }
 
 .hero-lead {
-  color: var(--muted);
+  color: var(--text);
   font-size: 1.1rem;
-  line-height: 1.6;
   max-width: 34rem;
 }
 
@@ -29,6 +27,7 @@
   margin: 1.5rem 0;
   display: grid;
   gap: 0.6rem;
+  color: var(--text-h);
 }
 
 .hero-checklist li {
@@ -39,6 +38,6 @@
 
 .hero-checklist li::before {
   content: "✓";
-  color: #2f8a72;
+  color: var(--success);
   font-weight: 800;
 }
