@@ -1,11 +1,11 @@
 import axios from "axios";
 import { api } from "./client";
 
-export interface User{
-    id: string;
-    email: string;
-    firstName: string;
-    lastName: string;
+export interface User {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface RegisterInput {
@@ -26,7 +26,9 @@ function extractErrors(error: unknown): string[] {
   if (!axios.isAxiosError(error)) return fallback;
   if (!error.response) return ["Kunde inte nå servern. Försök igen senare."];
 
-  const data = error.response.data as { errors?: unknown; title?: unknown } | undefined;
+  const data = error.response.data as
+    | { errors?: unknown; title?: unknown }
+    | undefined;
   if (data && typeof data === "object") {
     const { errors, title } = data;
 
@@ -49,12 +51,15 @@ export async function registerUser(input: RegisterInput): Promise<ApiResult> {
   }
 }
 
-export async function login(email: string, password: string): Promise<ApiResult> {
+export async function login(
+  email: string,
+  password: string,
+): Promise<ApiResult> {
   try {
     await api.post(
       "/api/auth/login",
       { email, password },
-      { params: { useCookies: true } }
+      { params: { useCookies: true } },
     );
     return { success: true, message: "Inloggningen lyckades" };
   } catch (error) {
