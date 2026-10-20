@@ -1,0 +1,44 @@
+.details-textbox {
+    padding: 24px 0;
+}
+
+/* Taggen "Teknik" */
+.details-category {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--category);
+    color: var(--buttons);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Rubriken */
+.details-textbox h1 {
+    margin: 12px 0;
+    font-size: 40px;
+    line-height: 120%;
+}
+
+/* Raden med tid, plats och värd */
+.details-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin-bottom: 24px;
+}
+
+.details-info p {
+    margin: 0;
+    font-size: 15px;
+}
+
+/* "Om meetupen" och beskrivningen */
+.details-textbox h2 {
+    margin: 0 0 8px;
+    font-size: 22px;
+}
+
+.details-textbox p {
+    margin: 0 0 12px;
+}
