@@ -2,7 +2,7 @@ import "./MeetingCard.css";
 import InfoRow from "./InfoRow/InfoRow";
 import { CalendarIcon, PinIcon, UserIcon } from "./Icons/Icons";
 import type { Meetup } from "../types/Meetup";
-import { formatDate } from "../formatDate";
+import { formatDate } from "../../../shared/utils/formatDate";
 
 type MeetingCardProps = {
     meetup: Meetup;

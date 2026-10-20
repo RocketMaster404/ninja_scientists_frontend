@@ -1,7 +1,6 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import "./SearchBar.css";
-import { mockCities } from "../FakeData/mockCities";
-import { mockCategories } from "../FakeData/mockCategories";
+import { getCategories, getCities } from "../overviewApi";
 
 export type SearchFilters = {
     query: string;
@@ -14,8 +13,6 @@ type Option = { value: string; label: string };
 
 type SearchBarProps = {
     onSearch?: (filters: SearchFilters) => void;
-    locations?: Option[];
-    categories?: Option[];
 };
 
 const dateOptions: Option[] = [
@@ -25,25 +22,29 @@ const dateOptions: Option[] = [
     { value: "month", label: "Denna månad" },
 ];
 
-const defaultLocations: Option[] = mockCities.map((c) => ({
-    value: c.city,
-    label: c.city,
-}));
-
-const defaultCategories: Option[] = mockCategories.map((c) => ({
-    value: String(c.id),
-    label: c.categoryName,
-}));
-
-function SearchBar({
-    onSearch,
-    locations = defaultLocations,
-    categories = defaultCategories,
-}: SearchBarProps) {
+function SearchBar({ onSearch }: SearchBarProps) {
     const [query, setQuery] = useState("");
     const [date, setDate] = useState("");
     const [location, setLocation] = useState("");
     const [category, setCategory] = useState("");
+    const [locations, setLocations] = useState<Option[]>([]);
+    const [categories, setCategories] = useState<Option[]>([]);
+
+    useEffect(() => {
+        getCities()
+            .then((data: { city: string }[]) =>
+                setLocations(data.map((c) => ({ value: c.city, label: c.city }))),
+            )
+            .catch(() => setLocations([]));
+
+        getCategories()
+            .then((data: { categoryName: string }[]) =>
+                setCategories(
+                    data.map((c) => ({ value: c.categoryName, label: c.categoryName })),
+                ),
+            )
+            .catch(() => setCategories([]));
+    }, []);
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
