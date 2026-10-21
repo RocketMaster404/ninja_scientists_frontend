@@ -1,6 +1,6 @@
-import HeroText from "../../components/Login/HeroText/HeroText";
-import AuthCard from "../../components/Login/AuthCard/AuthCard";
-import LoginForm from "../../components/Login/LoginForm/LoginForm";
+import HeroText from "../../feature/Login/HeroText/HeroText";
+import AuthCard from "../../feature/Login/AuthCard/AuthCard";
+import LoginForm from "../../feature/Login/LoginForm/LoginForm";
 import "./LoginPage.css";
 
 export default function LoginPage() {
