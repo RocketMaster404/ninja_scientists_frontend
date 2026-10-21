@@ -1,0 +1,90 @@
+.details-textbox {
+    padding: 0 0 1.5rem;
+}
+
+/* Bildytan högst upp */
+.details-hero {
+    position: relative;
+    height: 12rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--buttons), var(--success));
+    overflow: hidden;
+}
+
+/* Reserv-cirklarna, syns bara när ingen bild finns */
+.details-hero::before,
+.details-hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.details-hero::before {
+    width: 14rem;
+    height: 14rem;
+    right: 5rem;
+    top: -1rem;
+}
+
+.details-hero::after {
+    width: 12rem;
+    height: 12rem;
+    right: -3rem;
+    top: -0.5rem;
+}
+
+/* När en riktig bild finns */
+.details-hero-image {
+    background-size: cover;
+    background-position: center;
+}
+
+.details-hero-image::before,
+.details-hero-image::after {
+    display: none;
+}
+
+/* Kategori-taggen ovanpå bilden */
+.details-category {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 1;
+    padding: 0.25em 0.75em;
+    border-radius: 999px;
+    background: var(--background);
+    color: var(--buttons);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Rubriken */
+.details-textbox h1 {
+    margin: 0.75rem 0;
+    font-size: 2.25rem;
+    line-height: 120%;
+}
+
+/* Raden med tid, plats och värd */
+.details-info {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.details-info p {
+    margin: 0 1.5rem 0.5rem 0;
+    font-size: 0.85rem;
+}
+
+/* "Om meetupen" och beskrivningen */
+.details-textbox h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.details-textbox p {
+    margin-top: 0;
+}
