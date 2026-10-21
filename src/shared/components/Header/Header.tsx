@@ -24,6 +24,7 @@ export default function Header() {
           </NavLink>
 
           {loading ? null : user ? (
+            
             <HeaderAvatar />
           ) : (
             <NavLink to="/" end className="header-link">
