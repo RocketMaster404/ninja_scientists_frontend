@@ -86,3 +86,17 @@
   font-size: 0.8rem;
   font-weight: 700;
 }
+
+/* Knappen måste ligga ovanpå radens klickbara ::after-yta */
+.profile-item__review-btn {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  padding: 0 1rem;
+}
+
+.profile-item__reviewed {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-h);
+}

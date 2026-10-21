@@ -17,7 +17,7 @@ function PreviousMeetupsCard({ meetups }: Props) {
       ) : (
         <ul className="profile-card__list">
           {meetups.map((m) => (
-            <ProfileMeetupItem key={m.id} meetup={m} />
+            <ProfileMeetupItem key={m.id} meetup={m} reviewable/>
           ))}
         </ul>
       )}

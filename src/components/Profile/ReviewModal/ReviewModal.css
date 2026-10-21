@@ -1,0 +1,155 @@
+.review-modal {
+  width: min(520px, calc(100% - 2rem));
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--background);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.review-modal::backdrop {
+  background: rgba(35, 48, 58, 0.5);
+}
+
+.review-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.review-modal__title {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.review-modal__meetup {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.review-modal__author {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.review-modal__verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Stjärnor */
+.review-modal__stars {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.review-modal__stars legend {
+  padding: 0;
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.review-modal__star-row {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.review-modal__star {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--border);
+  cursor: pointer;
+}
+
+.review-modal__star--on {
+  color: var(--warning);
+}
+
+/* Radioknappen finns kvar för tangentbord och skärmläsare, men syns inte */
+.review-modal__star-input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.review-modal__star:focus-within {
+  outline: 2px solid var(--buttons);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.review-modal__rating-text {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+}
+
+/* Kommentar */
+.review-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.review-modal__field label {
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.review-modal__field textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font: inherit;
+  color: var(--text-h);
+  resize: vertical;
+}
+
+.review-modal__field textarea:focus {
+  border-color: var(--buttons);
+  outline: 2px solid var(--button-border);
+}
+
+.review-modal__counter {
+  align-self: flex-end;
+  font-size: 0.8rem;
+}
+
+.review-modal .alert {
+  max-width: none;
+  margin: 0;
+}
+
+.review-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* .btn-primary har width: 100% i index.css, två klasser här slår den */
+.review-modal__actions .btn {
+  width: auto;
+  min-width: 120px;
+}
