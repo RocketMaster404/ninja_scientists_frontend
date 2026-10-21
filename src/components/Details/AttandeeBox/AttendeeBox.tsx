@@ -55,13 +55,25 @@ function AttendeeBox({ meetupId }: Props) {
 
     return (
         <div className="attendee-box">
-            <h2>Anmälan</h2>
+            <h2>
+                {user && attendance.isRegistered && !attendance.isCompleted ? (
+                    <span className="attendee-title-registered">
+                        <span className="attendee-check">✓</span> Anmäld
+                    </span>
+                ) : (
+                    "Anmälan"
+                )}
+            </h2>
 
             <div className="attendee-track">
-                <div className="attendee-fill" style={{ width: `${percent}%` }} />
+                <div
+                    className="attendee-fill"
+                    style={{ width: `${percent}%` }}
+                />
             </div>
             <p className="attendee-text">
-                {attendance.registeredCount} av {attendance.capacity} platser anmälda
+                {attendance.registeredCount} av {attendance.capacity} platser
+                anmälda
             </p>
 
             {attendance.isCompleted && <button disabled>Genomförd</button>}
@@ -73,27 +85,28 @@ function AttendeeBox({ meetupId }: Props) {
             )}
 
             {!attendance.isCompleted && user && attendance.isRegistered && (
-                <>
-                    <button disabled>Anmäld</button>
-                    <button
-                        className="attendee-unregister"
-                        onClick={handleUnregister}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? "Avanmäler..." : "Avanmäl"}
-                    </button>
-                </>
-            )}
-
-            {!attendance.isCompleted && user && !attendance.isRegistered && attendance.isFull && (
-                <button disabled>Fullt</button>
-            )}
-
-            {!attendance.isCompleted && user && !attendance.isRegistered && !attendance.isFull && (
-                <button onClick={handleRegister} disabled={isLoading}>
-                    {isLoading ? "Anmäler..." : "Anmäl dig"}
+                <button
+                    className="attendee-unregister"
+                    onClick={handleUnregister}
+                    disabled={isLoading}
+                >
+                    {isLoading ? "Avanmäler..." : "Avanmäl"}
                 </button>
             )}
+
+            {!attendance.isCompleted &&
+                user &&
+                !attendance.isRegistered &&
+                attendance.isFull && <button disabled>Fullt</button>}
+
+            {!attendance.isCompleted &&
+                user &&
+                !attendance.isRegistered &&
+                !attendance.isFull && (
+                    <button onClick={handleRegister} disabled={isLoading}>
+                        {isLoading ? "Anmäler..." : "Anmäl dig"}
+                    </button>
+                )}
         </div>
     );
 }

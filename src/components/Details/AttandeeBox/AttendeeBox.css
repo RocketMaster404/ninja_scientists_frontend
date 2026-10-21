@@ -49,7 +49,7 @@
 }
 
 .attendee-box .attendee-unregister {
-    margin-top: 0.75rem;
+    margin-top: 0;
     background: transparent;
     border: 1px solid var(--danger);
     color: var(--danger);
@@ -66,4 +66,22 @@
     font-weight: 600;
     text-align: center;
     text-decoration: none;
+}
+
+.attendee-title-registered {
+    display: inline-flex;
+    align-items: center;
+}
+
+.attendee-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: var(--success);
+    color: var(--background);
+    font-size: 0.8em;
 }
