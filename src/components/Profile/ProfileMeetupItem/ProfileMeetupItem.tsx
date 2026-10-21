@@ -1,29 +1,33 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import type { MyProfileSummary } from "../types/profile";
+import { formatDate } from "../../../shared/utils/formatDate";
+import ReviewModal from "../ReviewModal/ReviewModal";
 import "./ProfileMeetupItem.css";
 
 interface Props {
   meetup: MyProfileSummary;
+  reviewable?: boolean; // true bara för tidigare meetups
 }
 
+// Månad som kort text i datumrutan: "okt", inte "okt."
 const monthShort = (d: Date) =>
   d.toLocaleDateString("sv-SE", { month: "short" }).replace(".", "");
+
 const timeOf = (d: Date) =>
   d.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" });
 
-export default function ProfileMeetupItem({ meetup }: Props) {
+export default function ProfileMeetupItem({ meetup, reviewable = false }: Props) {
+  const [reviewOpen, setReviewOpen] = useState(false);
+  const [reviewed, setReviewed] = useState(meetup.hasReviewed);
+
   // Texten saknar tidszon, så den tolkas som lokal tid
   const start = new Date(meetup.startTime);
   const end = meetup.endTime ? new Date(meetup.endTime) : null;
-  const timeText = end ? `${timeOf(start)}–${timeOf(end)}` : timeOf(start);
-  const dateText = start.toLocaleDateString("sv-SE", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
+  const endText = end ? `–${timeOf(end)}` : "";
 
   return (
-    <li className="profile-item">
+    <li className={`profile-item${reviewable ? " profile-item--past" : ""}`}>
       <div className="profile-item__date" aria-hidden="true">
         <span className="profile-item__month">{monthShort(start)}</span>
         <span className="profile-item__day">{start.getDate()}</span>
@@ -31,13 +35,14 @@ export default function ProfileMeetupItem({ meetup }: Props) {
 
       <div className="profile-item__info">
         <h3 className="profile-item__title">
-          <Link to={`/details/${meetup.id}`} className="profile-item__link">
+          <Link to={`/meetups/${meetup.id}`} className="profile-item__link">
             {meetup.title}
           </Link>
         </h3>
         <p className="profile-item__meta">
           <time dateTime={meetup.startTime}>
-            {dateText}, {timeText}
+            {formatDate(meetup.startTime)}
+            {endText}
           </time>
         </p>
         <p className="profile-item__meta">
@@ -45,7 +50,40 @@ export default function ProfileMeetupItem({ meetup }: Props) {
         </p>
       </div>
 
-      <span className="profile-item__category">{meetup.category}</span>
+      {reviewable ? (
+        reviewed ? (
+          <span className="profile-item__reviewed">✓ Recenserad</span>
+        ) : (
+          <button
+            type="button"
+            className="profile-item__btn profile-item__btn--review"
+            aria-haspopup="dialog"
+            aria-label={`Recensera ${meetup.title}`}
+            onClick={() => setReviewOpen(true)}
+          >
+            Recensera
+          </button>
+        )
+      ) : (
+        // Titeln länkar redan hit, så knappen är bara en visuell genväg
+        <Link
+          to={`/meetups/${meetup.id}`}
+          className="profile-item__btn profile-item__btn--view"
+          aria-hidden="true"
+          tabIndex={-1}
+        >
+          Visa
+        </Link>
+      )}
+
+      {reviewOpen && (
+        <ReviewModal
+          meetupId={meetup.id}
+          meetupTitle={meetup.title}
+          onClose={() => setReviewOpen(false)}
+          onReviewed={() => setReviewed(true)}
+        />
+      )}
     </li>
   );
 }
