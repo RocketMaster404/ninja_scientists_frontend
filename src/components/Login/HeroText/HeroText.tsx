@@ -15,7 +15,7 @@ export default function HeroText() {
         <li>Anmäl dig direkt från webben</li>
         <li>Avregistrera dig när planerna ändras</li>
       </ul>
-      <Link to="/meetups" className="btn btn-accent">
+      <Link to="/overview" className="btn btn-accent">
         Se kommande meetups
       </Link>
     </section>
