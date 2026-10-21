@@ -1,5 +1,7 @@
 import "./AttendeeBox.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../../shared/context/AuthContext";
 import type { Attendance } from "../types/Attendance";
 import {
     getAttendance,
@@ -12,6 +14,7 @@ interface Props {
 }
 
 function AttendeeBox({ meetupId }: Props) {
+    const { user, loading } = useAuth();
     const [attendance, setAttendance] = useState<Attendance | null>(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +27,7 @@ function AttendeeBox({ meetupId }: Props) {
         try {
             setAttendance(await registerToMeetup(meetupId));
         } catch {
-            alert("Du måste vara inloggad för att anmäla dig.");
+            alert("Det gick inte att anmäla dig. Försök igen.");
         } finally {
             setIsLoading(false);
         }
@@ -55,17 +58,21 @@ function AttendeeBox({ meetupId }: Props) {
             <h2>Anmälan</h2>
 
             <div className="attendee-track">
-                <div
-                    className="attendee-fill"
-                    style={{ width: `${percent}%` }}
-                />
+                <div className="attendee-fill" style={{ width: `${percent}%` }} />
             </div>
             <p className="attendee-text">
-                {attendance.registeredCount} av {attendance.capacity} platser
-                anmälda
+                {attendance.registeredCount} av {attendance.capacity} platser anmälda
             </p>
+
             {attendance.isCompleted && <button disabled>Genomförd</button>}
-            {!attendance.isCompleted && attendance.isRegistered && (
+
+            {!attendance.isCompleted && !loading && !user && (
+                <Link to="/" className="attendee-login">
+                    Logga in för att anmäla dig
+                </Link>
+            )}
+
+            {!attendance.isCompleted && user && attendance.isRegistered && (
                 <>
                     <button disabled>Anmäld</button>
                     <button
@@ -78,17 +85,15 @@ function AttendeeBox({ meetupId }: Props) {
                 </>
             )}
 
-            {!attendance.isCompleted &&
-                !attendance.isRegistered &&
-                attendance.isFull && <button disabled>Fullt</button>}
+            {!attendance.isCompleted && user && !attendance.isRegistered && attendance.isFull && (
+                <button disabled>Fullt</button>
+            )}
 
-            {!attendance.isCompleted &&
-                !attendance.isRegistered &&
-                !attendance.isFull && (
-                    <button onClick={handleRegister} disabled={isLoading}>
-                        {isLoading ? "Anmäler..." : "Anmäl dig"}
-                    </button>
-                )}
+            {!attendance.isCompleted && user && !attendance.isRegistered && !attendance.isFull && (
+                <button onClick={handleRegister} disabled={isLoading}>
+                    {isLoading ? "Anmäler..." : "Anmäl dig"}
+                </button>
+            )}
         </div>
     );
 }

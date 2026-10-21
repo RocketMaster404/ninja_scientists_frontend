@@ -54,3 +54,16 @@
     border: 1px solid var(--danger);
     color: var(--danger);
 }
+
+.attendee-box .attendee-login {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.7em 1em;
+    border-radius: var(--radius);
+    background: var(--buttons);
+    color: var(--background);
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+}
