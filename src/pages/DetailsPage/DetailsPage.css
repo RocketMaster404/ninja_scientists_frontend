@@ -1,9 +1,24 @@
 .details-page {
-    display: flex;
-    align-items: flex-start;
     max-width: 60rem;
     margin: 0 auto;
     padding: 1.5rem 1rem;
+}
+
+.details-back {
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.details-back:hover {
+    text-decoration: underline;
+}
+
+.details-columns {
+    display: flex;
+    align-items: flex-start;
 }
 
 .details-body {
@@ -18,11 +33,11 @@
 }
 
 @media (max-width: 50rem) {
-    .details-page {
+    .details-columns {
         flex-direction: column;
     }
 
-    .details-main {
+    .details-body {
         margin-right: 0;
         margin-bottom: 1.5rem;
         width: 100%;

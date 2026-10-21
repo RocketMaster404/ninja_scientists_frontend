@@ -1,6 +1,6 @@
 import "./DetailsPage.css";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import DetailsTextBox from "../../components/Details/DetailsTextBox/DetailsTextBox";
 import ReviewCard from "../../components/Details/ReviewCard/ReviewCard";
 import AttendeeBox from "../../components/Details/AttandeeBox/AttendeeBox";
@@ -31,7 +31,12 @@ function DetailsPage() {
     }
 
     return (
-        <div className="details-page">
+    <div className="details-page">
+        <Link to="/overview" className="details-back">
+            ‹ Tillbaka till alla meetups
+        </Link>
+
+        <div className="details-columns">
             <div className="details-body">
                 <DetailsTextBox meetup={meetup} />
                 <ReviewCard meetupId={meetup.id} />
@@ -40,7 +45,8 @@ function DetailsPage() {
                 <AttendeeBox meetupId={meetup.id} />
             </aside>
         </div>
-    );
+    </div>
+);
 }
 
 export default DetailsPage;
