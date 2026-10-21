@@ -1,0 +1,88 @@
+/* src/feature/Profile/ProfileMeetupItem/ProfileMeetupItem.css */
+.profile-item {
+  position: relative; /* så att hela raden kan vara klickbar via länken */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.profile-item:hover {
+  border-color: var(--button-border);
+  box-shadow: var(--shadow);
+}
+
+.profile-item:focus-within {
+  outline: 2px solid var(--buttons);
+  outline-offset: 2px;
+}
+
+.profile-item__date {
+  width: 64px;
+  flex: 0 0 64px;
+  padding: 0.5rem 0;
+  border-radius: var(--radius);
+  background: var(--category);
+  color: var(--buttons);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-item__month {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.profile-item__day {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.profile-item__info {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.profile-item__title {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.profile-item__link {
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+/* Gör hela raden klickbar */
+.profile-item__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.profile-item__link:focus-visible {
+  outline: none;
+}
+
+.profile-item__meta {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.profile-item__category {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--category);
+  color: var(--buttons);
+  font-size: 0.8rem;
+  font-weight: 700;
+}

@@ -6,16 +6,22 @@ import OverviewPage from "../../pages/OverviewPage/OverviewPage";
 import DetailsPage from "../../pages/DetailsPage/DetailsPage";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
     {
         element: <Layout />,
         children: [
-            { path: "/", element: <LoginPage /> },
-            { path: "/register", element: <RegisterPage /> },
-            { path: "/overview", element: <OverviewPage /> },
-            { path: "/meetups/:id", element: <DetailsPage /> },
-            { path: "/profile", element: <ProfilePage /> },
+{ path: "/", element: <LoginPage /> },
+{ path: "/register", element: <RegisterPage /> },
+{ path: "/overview", element: <OverviewPage /> },
+{ path: "/meetups/:id", element: <DetailsPage /> },
+{
+    element: <ProtectedRoute />,
+    children: [
+        { path: "/profile", element: <ProfilePage /> },
+    ],
+},
         ],
     },
 ]);
