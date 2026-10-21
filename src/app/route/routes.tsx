@@ -6,6 +6,7 @@ import OverviewPage from "../../pages/OverviewPage/OverviewPage"
 import DetailsPage from "../../pages/DetailsPage/DetailsPage"
 import ProfilePage from "../../pages/ProfilePage/ProfilePage"
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -15,7 +16,12 @@ const router = createBrowserRouter([
             { path: "/register", element: <RegisterPage/> },
             { path: "/overview", element: <OverviewPage/> },
             { path: "/details", element: <DetailsPage/> },
-            { path: "/profile", element: <ProfilePage/> },
+            {
+                element: <ProtectedRoute />,
+                children: [
+                    { path: "/profile", element: <ProfilePage/> },
+                ]
+            }
         ],
     },
 ]);
