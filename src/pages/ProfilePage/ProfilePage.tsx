@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../shared/context/AuthContext";
-import { getMyProfile } from "../../feature/Profile/api/profileApi";
-import type { MyProfileOverview } from "../../feature/Profile/types/profile";
-import MyRegisterCard from "../../feature/Profile/MyRegisterCard/MyRegisterCard";
-import PreviousMeetupsCard from "../../feature/Profile/PreviousMeetupsCard/PreviousMeetupsCard";
+import { getMyProfile } from "../../components/Profile/api/profileApi";
+import type { MyProfileOverview } from "../../components/Profile/types/profile";
+import MyRegisterCard from "../../components/Profile/MyRegisterCard/MyRegisterCard";
+import PreviousMeetupsCard from "../../components/Profile/PreviousMeetupsCard/PreviousMeetupsCard";
 import "./ProfilePage.css";
 
 type Status = "loading" | "error" | "success";
@@ -38,7 +38,11 @@ function ProfilePage() {
     setAttempt((a) => a + 1);
   }
 
-  const initial = (user?.firstName?.[0] ?? user?.email?.[0] ?? "?").toUpperCase();
+  const initial = (
+    user?.firstName?.[0] ??
+    user?.email?.[0] ??
+    "?"
+  ).toUpperCase();
 
   return (
     <main className="profile-page">
@@ -61,7 +65,11 @@ function ProfilePage() {
       {status === "error" && (
         <div role="alert" className="alert alert-error profile-error">
           <p>Vi kunde inte hämta dina meetups just nu.</p>
-          <button type="button" className="btn btn-primary profile-retry" onClick={retry}>
+          <button
+            type="button"
+            className="btn btn-primary profile-retry"
+            onClick={retry}
+          >
             Försök igen
           </button>
         </div>
