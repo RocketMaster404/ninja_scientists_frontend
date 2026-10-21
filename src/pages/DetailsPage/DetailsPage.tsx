@@ -1,29 +1,46 @@
-// import "./DetailsPage.css";
-
-// function DetailsPage() {
-//   return <div>DetailsPage</div>;
-// }
-
-// export default DetailsPage;
-
-// TESTDATA, ta bort sen och sätt det som är ovan:
+import "./DetailsPage.css";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import DetailsTextBox from "../../components/Details/DetailsTextBox/DetailsTextBox";
+import ReviewCard from "../../components/Details/ReviewCard/ReviewCard";
+import AttendeeBox from "../../components/Details/AttandeeBox/AttendeeBox";
 import type { MeetupDetail } from "../../components/Details/types/MeetupDetail";
-
-const testMeetup: MeetupDetail = {
-    id: 1,
-    title: "After work: React för nybörjare",
-    description: "Här skriver värden en beskrivning av meetupen.",
-    startTime: "2026-11-03T18:00:00",
-    endTime: null,
-    location: "Lindholmen",
-    city: "Göteborg",
-    host: "Sara L.",
-    categoryName: "Teknik",
-};
+import { getMeetingDetails } from "../../components/Details/detailAPI";
 
 function DetailsPage() {
-    return <DetailsTextBox meetup={testMeetup} />;
+    const { id } = useParams();
+    const [meetup, setMeetup] = useState<MeetupDetail | null>(null);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        if (!id) {
+            return;
+        }
+
+        getMeetingDetails(Number(id))
+            .then((data) => setMeetup(data))
+            .catch(() => setError("Meetupen kunde inte hämtas."));
+    }, [id]);
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
+    if (!meetup) {
+        return <p>Laddar...</p>;
+    }
+
+    return (
+        <div className="details-page">
+            <div className="details-body">
+                <DetailsTextBox meetup={meetup} />
+                <ReviewCard meetupId={meetup.id} />
+            </div>
+            <aside className="details-side">
+                <AttendeeBox meetupId={meetup.id} />
+            </aside>
+        </div>
+    );
 }
 
 export default DetailsPage;
