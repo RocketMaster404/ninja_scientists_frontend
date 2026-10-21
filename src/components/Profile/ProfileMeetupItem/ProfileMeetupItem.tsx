@@ -30,7 +30,7 @@ export default function ProfileMeetupItem({ meetup }: Props) {
 
       <div className="profile-item__info">
         <h3 className="profile-item__title">
-          <Link to={`/details/${meetup.id}`} className="profile-item__link">
+<Link to={`/meetups/${meetup.id}`} className="profile-item__link">
             {meetup.title}
           </Link>
         </h3>
