@@ -27,7 +27,7 @@ export default function ProfileMeetupItem({ meetup, reviewable = false }: Props)
   const endText = end ? `–${timeOf(end)}` : "";
 
   return (
-    <li className="profile-item">
+    <li className={`profile-item${reviewable ? " profile-item--past" : ""}`}>
       <div className="profile-item__date" aria-hidden="true">
         <span className="profile-item__month">{monthShort(start)}</span>
         <span className="profile-item__day">{start.getDate()}</span>
@@ -50,22 +50,31 @@ export default function ProfileMeetupItem({ meetup, reviewable = false }: Props)
         </p>
       </div>
 
-      <span className="profile-item__category">{meetup.category}</span>
-
-      {reviewable &&
-        (reviewed ? (
+      {reviewable ? (
+        reviewed ? (
           <span className="profile-item__reviewed">✓ Recenserad</span>
         ) : (
           <button
             type="button"
-            className="btn profile-item__review-btn"
+            className="profile-item__btn profile-item__btn--review"
             aria-haspopup="dialog"
             aria-label={`Recensera ${meetup.title}`}
             onClick={() => setReviewOpen(true)}
           >
             Recensera
           </button>
-        ))}
+        )
+      ) : (
+        // Titeln länkar redan hit, så knappen är bara en visuell genväg
+        <Link
+          to={`/meetups/${meetup.id}`}
+          className="profile-item__btn profile-item__btn--view"
+          aria-hidden="true"
+          tabIndex={-1}
+        >
+          Visa
+        </Link>
+      )}
 
       {reviewOpen && (
         <ReviewModal

@@ -1,4 +1,4 @@
-/* src/feature/Profile/ProfileMeetupItem/ProfileMeetupItem.css */
+/* src/components/Profile/ProfileMeetupItem/ProfileMeetupItem.css */
 .profile-item {
   position: relative; /* så att hela raden kan vara klickbar via länken */
   display: flex;
@@ -31,6 +31,12 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+
+/* Tidigare meetups: grå datumruta */
+.profile-item--past .profile-item__date {
+  background: var(--page-bg);
+  color: var(--text);
 }
 
 .profile-item__month {
@@ -78,21 +84,41 @@
   color: var(--text);
 }
 
-.profile-item__category {
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  background: var(--category);
-  color: var(--buttons);
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-/* Knappen måste ligga ovanpå radens klickbara ::after-yta */
-.profile-item__review-btn {
+/* Knappar: ligger ovanpå radens klickbara ::after-yta */
+.profile-item__btn {
   position: relative;
   z-index: 1;
-  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   padding: 0 1rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile-item__btn--view {
+  background: transparent;
+  border-color: var(--buttons);
+  color: var(--buttons);
+}
+
+.profile-item__btn--view:hover {
+  background: var(--category);
+}
+
+.profile-item__btn--review {
+  background: var(--warning);
+  border-color: var(--warning);
+  color: var(--text-h);
+}
+
+.profile-item__btn--review:hover {
+  filter: brightness(0.95);
 }
 
 .profile-item__reviewed {
