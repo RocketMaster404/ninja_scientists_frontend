@@ -1,0 +1,15 @@
+.rickroll-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+}
+
+.rickroll-video {
+  width: min(90vw, 800px);
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: var(--radius);
+}

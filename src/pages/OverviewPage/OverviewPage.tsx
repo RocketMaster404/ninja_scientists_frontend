@@ -41,12 +41,14 @@ function OverviewPage() {
 
     return (
         <div>
-            <SearchBar onSearch={setFilters} />
-            {loading && <p>Hämtar meetups…</p>}
-            {error && <p>{error}</p>}
-            {!loading && !error && visibleMeetups.length === 0 && (
-                <p>Inga meetups matchar din sökning.</p>
-            )}
+            <div className="searchbarContainer">
+                <SearchBar onSearch={setFilters} />
+                {loading && <p>Hämtar meetups…</p>}
+                {error && <p>{error}</p>}
+                {!loading && !error && visibleMeetups.length === 0 && (
+                    <p>Inga meetups matchar din sökning.</p>
+                )}
+            </div>
             <div className="meetupList">
                 {visibleMeetups.map((meetup) => (
                     <MeetingCard key={meetup.title} meetup={meetup} />

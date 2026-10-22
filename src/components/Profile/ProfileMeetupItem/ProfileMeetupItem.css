@@ -1,0 +1,128 @@
+/* src/components/Profile/ProfileMeetupItem/ProfileMeetupItem.css */
+.profile-item {
+  position: relative; /* så att hela raden kan vara klickbar via länken */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.profile-item:hover {
+  border-color: var(--button-border);
+  box-shadow: var(--shadow);
+}
+
+.profile-item:focus-within {
+  outline: 2px solid var(--buttons);
+  outline-offset: 2px;
+}
+
+.profile-item__date {
+  width: 64px;
+  flex: 0 0 64px;
+  padding: 0.5rem 0;
+  border-radius: var(--radius);
+  background: var(--category);
+  color: var(--buttons);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tidigare meetups: grå datumruta */
+.profile-item--past .profile-item__date {
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+.profile-item__month {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.profile-item__day {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.profile-item__info {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.profile-item__title {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.profile-item__link {
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+/* Gör hela raden klickbar */
+.profile-item__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.profile-item__link:focus-visible {
+  outline: none;
+}
+
+.profile-item__meta {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+/* Knappar: ligger ovanpå radens klickbara ::after-yta */
+.profile-item__btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile-item__btn--view {
+  background: transparent;
+  border-color: var(--buttons);
+  color: var(--buttons);
+}
+
+.profile-item__btn--view:hover {
+  background: var(--category);
+}
+
+.profile-item__btn--review {
+  background: var(--warning);
+  border-color: var(--warning);
+  color: var(--text-h);
+}
+
+.profile-item__btn--review:hover {
+  filter: brightness(0.95);
+}
+
+.profile-item__reviewed {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-h);
+}

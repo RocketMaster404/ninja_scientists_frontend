@@ -1,0 +1,87 @@
+.attendee-box {
+    background: var(--background);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.25rem;
+}
+
+.attendee-box h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+}
+
+.attendee-track {
+    width: 100%;
+    height: 0.35rem;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.attendee-fill {
+    height: 100%;
+    background: var(--buttons);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.attendee-text {
+    margin: 0.5rem 0 1rem;
+    font-size: 0.75rem;
+    color: var(--text);
+}
+
+.attendee-box button {
+    width: 100%;
+    padding: 0.7em 1em;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--buttons);
+    color: var(--background);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.attendee-box button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.attendee-box .attendee-unregister {
+    margin-top: 0;
+    background: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+}
+
+.attendee-box .attendee-login {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.7em 1em;
+    border-radius: var(--radius);
+    background: var(--buttons);
+    color: var(--background);
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+}
+
+.attendee-title-registered {
+    display: inline-flex;
+    align-items: center;
+}
+
+.attendee-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.3em;
+    height: 1.3em;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: var(--success);
+    color: var(--background);
+    font-size: 0.8em;
+}

@@ -1,4 +1,5 @@
 export interface Meetup {
+    id: number
     title: string;
     description: string;
     startTime: string;
