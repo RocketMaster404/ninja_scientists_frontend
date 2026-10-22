@@ -1,0 +1,73 @@
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 520px;
+  margin: 4rem auto;
+  padding: 3rem 2rem;
+  text-align: center;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+}
+
+/* Liten markering ovanför rubriken, i samma stil som kategoritaggarna */
+.error-page::before {
+  content: "Oj!";
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--buttons);
+  background: var(--category);
+  border-radius: 999px;
+}
+
+.error-page h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.error-page p {
+  margin: 0 0 2rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.error-page a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: var(--buttons);
+  border-radius: 10px;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.error-page a:hover {
+  background: #26536F;
+}
+
+.error-page a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--button-border);
+}
+
+@media (max-width: 640px) {
+  .error-page {
+    margin: 2rem 1rem;
+    padding: 2.5rem 1.25rem;
+  }
+}
