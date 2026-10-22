@@ -47,3 +47,36 @@
         width: 100%;
     }
 }
+
+.details-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 1.5rem 1rem;
+    text-align: center;
+}
+
+.details-error h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+}
+
+.details-error p {
+    margin: 0 0 1.5rem;
+}
+
+.details-error .details-error-button {
+    display: inline-block;
+    padding: 0.7em 1.5em;
+    border-radius: var(--radius);
+    background: var(--buttons);
+    color: var(--background);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.details-error .details-error-button:hover {
+    opacity: 0.9;
+}
