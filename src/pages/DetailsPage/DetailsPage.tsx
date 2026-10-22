@@ -23,8 +23,16 @@ function DetailsPage() {
     }, [id]);
 
     if (error) {
-        return <p>{error}</p>;
-    }
+    return (
+        <div className="details-error">
+            <h1>Meetupen hittades inte</h1>
+            <p>Den kanske har tagits bort, eller så är adressen fel.</p>
+            <Link to="/overview" className="details-error-button">
+                Tillbaka till meetups
+            </Link>
+        </div>
+    );
+}
 
     if (!meetup) {
         return <p>Laddar...</p>;
