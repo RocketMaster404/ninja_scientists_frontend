@@ -1,10 +1,12 @@
 import { useEffect, useState, type FormEvent } from "react";
 import "./SearchBar.css";
 import { getCategories, getCities } from "../overviewApi";
+import { todayIso } from "../../../shared/utils/isoDate";
 
 export type SearchFilters = {
     query: string;
     date: string;
+    dateRange: number;
     location: string;
     category: string;
 };
@@ -15,32 +17,42 @@ type SearchBarProps = {
     onSearch?: (filters: SearchFilters) => void;
 };
 
-const dateOptions: Option[] = [
-    { value: "", label: "Alla datum" },
-    { value: "today", label: "Idag" },
-    { value: "week", label: "Denna vecka" },
-    { value: "month", label: "Denna månad" },
+const emptyFilters: SearchFilters = {
+    query: "",
+    date: "",
+    dateRange: 0,
+    location: "",
+    category: "",
+};
+
+const rangeOptions = [
+    { value: 0, label: "Exakt" },
+    { value: 3, label: "±3 dagar" },
+    { value: 7, label: "±7 dagar" },
 ];
 
 function SearchBar({ onSearch }: SearchBarProps) {
-    const [query, setQuery] = useState("");
-    const [date, setDate] = useState("");
-    const [location, setLocation] = useState("");
-    const [category, setCategory] = useState("");
+    // Alla filter i ett objekt, så att sök och återställ blir en rad var
+    const [filters, setFilters] = useState<SearchFilters>(emptyFilters);
     const [locations, setLocations] = useState<Option[]>([]);
     const [categories, setCategories] = useState<Option[]>([]);
 
     useEffect(() => {
         getCities()
             .then((data: { city: string }[]) =>
-                setLocations(data.map((c) => ({ value: c.city, label: c.city }))),
+                setLocations(
+                    data.map((c) => ({ value: c.city, label: c.city })),
+                ),
             )
             .catch(() => setLocations([]));
 
         getCategories()
             .then((data: { categoryName: string }[]) =>
                 setCategories(
-                    data.map((c) => ({ value: c.categoryName, label: c.categoryName })),
+                    data.map((c) => ({
+                        value: c.categoryName,
+                        label: c.categoryName,
+                    })),
                 ),
             )
             .catch(() => setCategories([]));
@@ -48,7 +60,14 @@ function SearchBar({ onSearch }: SearchBarProps) {
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        onSearch?.({ query, date, location, category });
+        onSearch?.(filters);
+    }
+
+       
+    function handleReset() {
+        const withoutDate = { ...filters, date: "", dateRange: 0 };
+        setFilters(withoutDate);
+        onSearch?.(withoutDate);
     }
 
     return (
@@ -66,32 +85,86 @@ function SearchBar({ onSearch }: SearchBarProps) {
                             type="text"
                             id="search-query"
                             placeholder="Sök på nyckelord"
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
+                            maxLength={100}
+                            value={filters.query}
+                            onChange={(e) =>
+                                setFilters({
+                                    ...filters,
+                                    query: e.target.value,
+                                })
+                            }
                         />
                     </div>
 
                     <div className="field">
-                        <label htmlFor="search-date">Datum</label>
-                        <select
+                        <div className="fieldLabelRow">
+                            <label htmlFor="search-date">Datum</label>
+                            {filters.date && (
+                                <button
+                                    type="button"
+                                    className="resetLink"
+                                    onClick={handleReset}
+                                    aria-label="Återställ alla filter"
+                                >
+                                    Återställ
+                                </button>
+                            )}
+                        </div>
+                        <input
+                            type="date"
                             id="search-date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                        >
-                            {dateOptions.map((o) => (
-                                <option key={o.value} value={o.value}>
-                                    {o.label}
-                                </option>
-                            ))}
-                        </select>
+                            min={todayIso()}
+                            value={filters.date}
+                            onChange={(e) =>
+                                setFilters({ ...filters, date: e.target.value })
+                            }
+                        />
                     </div>
+
+                    <fieldset
+                        className="field rangeField"
+                        disabled={!filters.date}
+                    >
+                        <legend>Flexibilitet</legend>
+                        <div className="rangeOptions">
+                            {rangeOptions.map((o) => (
+                                <label
+                                    key={o.value}
+                                    className={
+                                        filters.dateRange === o.value
+                                            ? "rangeOption rangeOption--active"
+                                            : "rangeOption"
+                                    }
+                                >
+                                    <input
+                                        type="radio"
+                                        name="date-range"
+                                        value={o.value}
+                                        checked={filters.dateRange === o.value}
+                                        onChange={() =>
+                                            setFilters({
+                                                ...filters,
+                                                dateRange: o.value,
+                                            })
+                                        }
+                                    />
+                                    {o.label}
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
 
                     <div className="field">
                         <label htmlFor="search-location">Plats</label>
                         <select
                             id="search-location"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
+                            value={filters.location}
+                            onChange={(e) =>
+                                setFilters({
+                                    ...filters,
+                                    location: e.target.value,
+                                })
+                            }
                         >
                             <option value="">Alla platser</option>
                             {locations.map((o) => (
@@ -106,8 +179,13 @@ function SearchBar({ onSearch }: SearchBarProps) {
                         <label htmlFor="search-category">Kategori</label>
                         <select
                             id="search-category"
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
+                            value={filters.category}
+                            onChange={(e) =>
+                                setFilters({
+                                    ...filters,
+                                    category: e.target.value,
+                                })
+                            }
                         >
                             <option value="">Alla kategorier</option>
                             {categories.map((o) => (
