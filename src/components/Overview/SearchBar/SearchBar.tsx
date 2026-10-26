@@ -17,6 +17,14 @@ type SearchBarProps = {
     onSearch?: (filters: SearchFilters) => void;
 };
 
+const emptyFilters: SearchFilters = {
+    query: "",
+    date: "",
+    dateRange: 0,
+    location: "",
+    category: "",
+};
+
 const rangeOptions = [
     { value: 0, label: "Exakt" },
     { value: 3, label: "±3 dagar" },
@@ -24,11 +32,8 @@ const rangeOptions = [
 ];
 
 function SearchBar({ onSearch }: SearchBarProps) {
-    const [query, setQuery] = useState("");
-    const [date, setDate] = useState("");
-    const [dateRange, setDateRange] = useState(0);
-    const [location, setLocation] = useState("");
-    const [category, setCategory] = useState("");
+    // Alla filter i ett objekt, så att sök och återställ blir en rad var
+    const [filters, setFilters] = useState<SearchFilters>(emptyFilters);
     const [locations, setLocations] = useState<Option[]>([]);
     const [categories, setCategories] = useState<Option[]>([]);
 
@@ -55,7 +60,14 @@ function SearchBar({ onSearch }: SearchBarProps) {
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        onSearch?.({ query, date, dateRange, location, category });
+        onSearch?.(filters);
+    }
+
+       
+    function handleReset() {
+        const withoutDate = { ...filters, date: "", dateRange: 0 };
+        setFilters(withoutDate);
+        onSearch?.(withoutDate);
     }
 
     return (
@@ -74,30 +86,52 @@ function SearchBar({ onSearch }: SearchBarProps) {
                             id="search-query"
                             placeholder="Sök på nyckelord"
                             maxLength={100}
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
+                            value={filters.query}
+                            onChange={(e) =>
+                                setFilters({
+                                    ...filters,
+                                    query: e.target.value,
+                                })
+                            }
                         />
                     </div>
 
                     <div className="field">
-                        <label htmlFor="search-date">Datum</label>
+                        <div className="fieldLabelRow">
+                            <label htmlFor="search-date">Datum</label>
+                            {filters.date && (
+                                <button
+                                    type="button"
+                                    className="resetLink"
+                                    onClick={handleReset}
+                                    aria-label="Återställ alla filter"
+                                >
+                                    Återställ
+                                </button>
+                            )}
+                        </div>
                         <input
                             type="date"
                             id="search-date"
                             min={todayIso()}
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
+                            value={filters.date}
+                            onChange={(e) =>
+                                setFilters({ ...filters, date: e.target.value })
+                            }
                         />
                     </div>
 
-                    <fieldset className="field rangeField" disabled={!date}>
+                    <fieldset
+                        className="field rangeField"
+                        disabled={!filters.date}
+                    >
                         <legend>Flexibilitet</legend>
                         <div className="rangeOptions">
                             {rangeOptions.map((o) => (
                                 <label
                                     key={o.value}
                                     className={
-                                        dateRange === o.value
+                                        filters.dateRange === o.value
                                             ? "rangeOption rangeOption--active"
                                             : "rangeOption"
                                     }
@@ -106,8 +140,13 @@ function SearchBar({ onSearch }: SearchBarProps) {
                                         type="radio"
                                         name="date-range"
                                         value={o.value}
-                                        checked={dateRange === o.value}
-                                        onChange={() => setDateRange(o.value)}
+                                        checked={filters.dateRange === o.value}
+                                        onChange={() =>
+                                            setFilters({
+                                                ...filters,
+                                                dateRange: o.value,
+                                            })
+                                        }
                                     />
                                     {o.label}
                                 </label>
@@ -119,8 +158,13 @@ function SearchBar({ onSearch }: SearchBarProps) {
                         <label htmlFor="search-location">Plats</label>
                         <select
                             id="search-location"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
+                            value={filters.location}
+                            onChange={(e) =>
+                                setFilters({
+                                    ...filters,
+                                    location: e.target.value,
+                                })
+                            }
                         >
                             <option value="">Alla platser</option>
                             {locations.map((o) => (
@@ -135,8 +179,13 @@ function SearchBar({ onSearch }: SearchBarProps) {
                         <label htmlFor="search-category">Kategori</label>
                         <select
                             id="search-category"
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
+                            value={filters.category}
+                            onChange={(e) =>
+                                setFilters({
+                                    ...filters,
+                                    category: e.target.value,
+                                })
+                            }
                         >
                             <option value="">Alla kategorier</option>
                             {categories.map((o) => (
