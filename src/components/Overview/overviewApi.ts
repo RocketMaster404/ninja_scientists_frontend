@@ -1,4 +1,5 @@
 import { api } from "../../shared/api/client";
+import { addDays, parseIsoDate, toIsoDate } from "../../shared/utils/isoDate";
 import type { SearchFilters } from "./SearchBar/SearchBar";
 import type { Meetup } from "./types/Meetup";
 
@@ -12,20 +13,6 @@ export async function getCities() {
     return response.data;
 }
 
-
-function toIsoDate(d: Date): string {
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    return `${d.getFullYear()}-${month}-${day}`;
-}
-
-const extraDays: Record<string, number> = {
-    today: 0,
-    week: 6,
-    month: 30,
-};
-
-
 export async function searchMeetups(filters: SearchFilters): Promise<Meetup[]> {
     const params: Record<string, string> = {};
 
@@ -34,15 +21,21 @@ export async function searchMeetups(filters: SearchFilters): Promise<Meetup[]> {
     if (filters.location) params.city = filters.location;
     if (filters.category) params.category = filters.category;
 
-    const days = extraDays[filters.date];
-    if (days !== undefined) {
-        const start = new Date();
-        const end = new Date();
-        end.setDate(start.getDate() + days);
+    if (filters.date) {
+        const chosen = parseIsoDate(filters.date);
+        const today = parseIsoDate(toIsoDate(new Date()));
+
+        let start = addDays(chosen, -filters.dateRange);
+        const end = addDays(chosen, filters.dateRange);
+
+        if (start < today && end >= today) start = today;
+
         params.startDate = toIsoDate(start);
         params.endDate = toIsoDate(end);
     }
 
-    const response = await api.get<Meetup[]>("/api/overview/searchbar", { params });
+    const response = await api.get<Meetup[]>("/api/overview/searchbar", {
+        params,
+    });
     return response.data;
 }
