@@ -11,6 +11,7 @@ import type { Meetup } from "../../components/Overview/types/Meetup";
 const emptyFilters: SearchFilters = {
     query: "",
     date: "",
+    dateRange: 0,
     location: "",
     category: "",
 };
