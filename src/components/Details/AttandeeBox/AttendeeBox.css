@@ -10,25 +10,8 @@
     font-size: 1.1rem;
 }
 
-.attendee-track {
-    width: 100%;
-    height: 0.35rem;
-    background: var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-}
-
-.attendee-fill {
-    height: 100%;
-    background: var(--buttons);
-    border-radius: 999px;
-    transition: width 0.3s ease;
-}
-
-.attendee-text {
-    margin: 0.5rem 0 1rem;
-    font-size: 0.75rem;
-    color: var(--text);
+.attendee-box .attendee-progress {
+    margin-bottom: 1rem;
 }
 
 .attendee-box button {

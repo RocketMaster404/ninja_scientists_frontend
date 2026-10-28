@@ -2,6 +2,7 @@ import "./AttendeeBox.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../shared/context/AuthContext";
+import AttendeeProgress from "../../../shared/components/AttendeeProgress/AttendeeProgress";
 import type { Attendance } from "../types/Attendance";
 import {
     getAttendance,
@@ -48,11 +49,6 @@ function AttendeeBox({ meetupId }: Props) {
         return null;
     }
 
-    const percent = Math.min(
-        (attendance.registeredCount / attendance.capacity) * 100,
-        100,
-    );
-
     return (
         <div className="attendee-box">
             <h2>
@@ -65,16 +61,10 @@ function AttendeeBox({ meetupId }: Props) {
                 )}
             </h2>
 
-            <div className="attendee-track">
-                <div
-                    className="attendee-fill"
-                    style={{ width: `${percent}%` }}
-                />
-            </div>
-            <p className="attendee-text">
-                {attendance.registeredCount} av {attendance.capacity} platser
-                anmälda
-            </p>
+            <AttendeeProgress
+                registered={attendance.registeredCount}
+                capacity={attendance.capacity}
+            />
 
             {attendance.isCompleted && <button disabled>Genomförd</button>}
 
