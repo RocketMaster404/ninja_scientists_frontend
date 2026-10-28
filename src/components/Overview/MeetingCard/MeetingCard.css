@@ -36,32 +36,8 @@
     gap: 0.35rem;
 }
 
-.attendeesContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+.meetingCard .attendee-progress {
     margin-top: 0.25rem;
-}
-
-.progressTrack {
-    width: 100%;
-    height: 6px;
-    background: var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-}
-
-.progressFill {
-    height: 100%;
-    background: var(--buttons);
-    border-radius: 999px;
-    transition: width 0.3s ease;
-}
-
-.attendeesText {
-    margin: 0;
-    font-size: 0.75rem;
-    color: var(--text);
 }
 
 .buttonContainer button {

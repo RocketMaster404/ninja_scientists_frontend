@@ -1,0 +1,26 @@
+.attendee-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.attendee-progress-track {
+    width: 100%;
+    height: 0.35rem;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.attendee-progress-fill {
+    height: 100%;
+    background: var(--buttons);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.attendee-progress-text {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text);
+}
